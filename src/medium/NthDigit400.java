@@ -18,8 +18,8 @@ public class NthDigit400 {
             if (n > nums[i]) {
                 n = n - nums[i];
                 int startNum = (int) Math.pow(10, i + 1);
-                int num = startNum + n / (i + 3);
-                return getDigit(num, i - 1);
+                int num = startNum + (n - 1) / (i + 1);
+                return getDigit(num, (n - 1) % (i + 1));
             }
         }
         return 0;
@@ -29,4 +29,22 @@ public class NthDigit400 {
         String s = String.valueOf(num);
         return Character.getNumericValue(s.charAt(th));
     }
+
+    //Best Solution
+//    public int findNthDigit(int n) {
+//        int len = 1;
+//        long count = 9;
+//        int start = 1;
+//
+//        while (n > len * count) {
+//            n -= len * count;
+//            len += 1;
+//            count *= 10;
+//            start *= 10;
+//        }
+//
+//        start += (n - 1) / len;
+//        String s = Integer.toString(start);
+//        return Character.getNumericValue(s.charAt((n - 1) % len));
+//    }
 }
