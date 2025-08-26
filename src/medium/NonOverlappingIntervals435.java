@@ -1,0 +1,55 @@
+package medium;
+
+import java.util.Arrays;
+
+public class NonOverlappingIntervals435 {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        int res = 0;
+        int prev = 0;
+        Arrays.sort(intervals, (a, b) -> {
+            if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
+            else return Integer.compare(a[1], b[1]);
+        });
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] >= intervals[prev][1]) {
+                prev=i;
+            } else if (intervals[i][1] <= intervals[prev][1]) {
+                prev=i;
+                res++;
+            } else {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    //Best Solution
+//    public int eraseOverlapIntervals(int[][] intervals) {
+//        int max = intervals[0][1];
+//        int min = max;
+//        for (int i = 1; i < intervals.length; i++) {
+//            max = Math.max(max, intervals[i][1]);
+//            min = Math.min(min, intervals[i][1]);
+//        }
+//        int shift = 1 - min;
+//        int maxIntervalRange = 2 + max - min;
+//        int[] rightEnds = new int[maxIntervalRange];
+//
+//        for (int[] interval : intervals) {
+//            int left = interval[0] + shift;
+//            int right = interval[1] + shift;
+//            if (left > rightEnds[right]) {
+//                rightEnds[right] = left;
+//            }
+//        }
+//        int start = 1;
+//        int count = 1;
+//        for (int i = 2; i < maxIntervalRange; i++) {
+//            if (start <= rightEnds[i]) {
+//                count++;
+//                start = i;
+//            }
+//        }
+//        return intervals.length - count;
+//    }
+}
