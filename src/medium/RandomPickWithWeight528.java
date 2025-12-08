@@ -5,10 +5,8 @@ import java.util.Random;
 public class RandomPickWithWeight528 {
     private Random rd;
     private int[] prefixSum;
-    private int[] w;
 
     public RandomPickWithWeight528(int[] w) {
-        this.w = w;
         this.prefixSum = new int[w.length];
         rd = new Random();
         init(w);
